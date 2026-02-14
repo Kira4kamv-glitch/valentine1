@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shivaay 💋</title>
+<style>
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:black;
+color:white;
+overflow:hidden;
+}
+
+/* lockscreen */
+#lockscreen{
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff4b6e,#ff8a9b);
+}
+
+input{
+padding:12px;
+border-radius:10px;
+border:none;
+font-size:18px;
+text-align:center;
+}
+
+button{
+margin-top:10px;
+padding:12px 20px;
+border:none;
+border-radius:20px;
+background:#00ff99;
+font-size:18px;
+}
+
+/* main screen */
+#main{
+display:none;
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#ff4b6e,#ff8a9b);
+text-align:center;
+padding-top:80px;
+}
+
+/* typing text */
+#typing{
+font-size:26px;
+font-weight:bold;
+min-height:40px;
+}
+
+/* hearts */
+.heart{
+position:absolute;
+color:red;
+animation:float 5s linear infinite;
+}
+@keyframes float{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
+}
+</style>
+</head>
+<body>
+
+<div id="lockscreen">
+<h2>Enter password to open gift ❤️</h2>
+<input id="pass" type="password" placeholder="Password">
+<br>
+<button onclick="unlock()">Unlock 💌</button>
+<p id="wrong"></p>
+</div>
+
+<div id="main">
+<h1>I Love You Khaani ❤️</h1>
+<div id="typing"></div>
+</div>
+
+<audio autoplay loop>
+<source src="Ek-Tara-Vajda-Ve.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function unlock(){
+if(document.getElementById("pass").value==="pussy pic"){
+document.getElementById("lockscreen").style.display="none";
+document.getElementById("main").style.display="block";
+startTyping();
+}
+else{
+document.getElementById("wrong").innerText="Wrong password 😢";
+}
+}
+
+/* typing animation */
+const text="You are my forever, my peace, my everything. Will you be mine forever? 💍";
+let i=0;
+function startTyping(){
+let speed=50;
+function type(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i);
+i++;
+setTimeout(type,speed);
+}
+}
+type();
+}
+
+/* hearts */
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+10)+"px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),5000);
+},300);
+</script>
+
+</body>
+</html>
