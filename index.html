@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shivaay 💋</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:black;
+color:white;
+overflow:hidden;
+}
+
+/* screens */
+.screen{
+position:absolute;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+}
+.active{display:flex;}
+
+/* lockscreen */
+#lockscreen{
+background:linear-gradient(135deg,#ff4e8a,#ff6a88);
+}
+input{
+padding:12px;
+border:none;
+border-radius:8px;
+font-size:18px;
+text-align:center;
+}
+button{
+padding:12px 20px;
+margin-top:10px;
+border:none;
+border-radius:20px;
+background:#00d26a;
+color:white;
+font-size:18px;
+}
+
+/* whatsapp notification */
+#notification{
+position:absolute;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+background:#25D366;
+color:white;
+padding:12px 20px;
+border-radius:12px;
+display:none;
+}
+
+/* chat screen */
+#chat{
+background:#0b141a;
+}
+.chatbox{
+width:90%;
+height:80%;
+background:#111;
+border-radius:10px;
+padding:15px;
+overflow:auto;
+}
+.msg{
+background:#25D366;
+color:black;
+padding:10px;
+border-radius:10px;
+margin:5px 0;
+max-width:80%;
+}
+
+/* proposal */
+#proposal{
+background:linear-gradient(135deg,#ff4e8a,#ff6a88);
+}
+.no{
+background:red;
+position:absolute;
+}
+
+/* hearts */
+.heart{
+position:absolute;
+color:red;
+animation:float 5s linear infinite;
+}
+@keyframes float{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="notification">📱 Shivaay 💋: I love you...</div>
+
+<!-- lockscreen -->
+<div id="lockscreen" class="screen active">
+<h2>Enter password ❤️</h2>
+<input type="password" id="pass">
+<button onclick="unlock()">Unlock</button>
+<p id="wrong"></p>
+</div>
+
+<!-- chat -->
+<div id="chat" class="screen">
+<h2>WhatsApp 💬 Shivaay 💋</h2>
+<div class="chatbox" id="chatbox"></div>
+</div>
+
+<!-- proposal -->
+<div id="proposal" class="screen">
+<h1>I Love You Khaani ❤️</h1>
+<button onclick="yes()">Yes 💍</button>
+<button class="no" id="noBtn">No 😭</button>
+</div>
+
+<script>
+const password="Blow Me";
+
+function unlock(){
+let p=document.getElementById("pass").value;
+if(p===password){
+vibrate();
+showNotification();
+}else{
+document.getElementById("wrong").innerText="Wrong password 😢";
+}
+}
+
+function vibrate(){
+if(navigator.vibrate) navigator.vibrate([200,100,200]);
+}
+
+function showNotification(){
+let n=document.getElementById("notification");
+n.style.display="block";
+setTimeout(()=>{
+n.style.display="none";
+openChat();
+},2000);
+}
+
+function openChat(){
+switchScreen("chat");
+typeMessage("I love you so much Khaani ❤️");
+setTimeout(()=>{
+typeMessage("You are my forever, my peace, my everything.");
+},2000);
+setTimeout(()=>{
+typeMessage("Will you be mine forever? 💍");
+},4000);
+setTimeout(()=>{
+switchScreen("proposal");
+},7000);
+}
+
+function typeMessage(text){
+let box=document.getElementById("chatbox");
+let msg=document.createElement("div");
+msg.className="msg";
+box.appendChild(msg);
+let i=0;
+let interval=setInterval(()=>{
+msg.innerText=text.substring(0,i);
+i++;
+if(i>text.length) clearInterval(interval);
+},50);
+}
+
+function switchScreen(id){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+function yes(){
+alert("Forever Yours ❤️");
+}
+
+let noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("touchstart",moveNo);
+noBtn.addEventListener("mouseover",moveNo);
+
+function moveNo(){
+noBtn.style.top=Math.random()*80+"%";
+noBtn.style.left=Math.random()*80+"%";
+}
+
+/* hearts */
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.style.left=Math.random()*100+"%";
+h.innerText="❤️";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+},500);
+
+</script>
+
+</body>
+</html>
