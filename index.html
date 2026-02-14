@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shivaay 💋</title>
+
+<style>
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto;
+background:black;
+color:white;
+overflow:hidden;
+}
+
+/* Screens */
+.screen{
+position:absolute;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+}
+
+.active{display:flex;}
+
+/* Lockscreen */
+#lockscreen{
+background:linear-gradient(160deg,#ff4d6d,#ff758f);
+}
+
+.lockbox{
+background:white;
+color:black;
+padding:20px;
+border-radius:20px;
+}
+
+input{
+padding:12px;
+font-size:18px;
+border-radius:10px;
+border:none;
+margin-top:10px;
+}
+
+button{
+padding:12px 20px;
+border:none;
+border-radius:20px;
+margin-top:15px;
+font-size:16px;
+cursor:pointer;
+}
+
+.unlock{background:#00c853;color:white;}
+
+/* WhatsApp */
+#whatsapp{
+background:#111;
+}
+
+.chatbox{
+width:90%;
+max-width:400px;
+background:#222;
+border-radius:20px;
+padding:15px;
+}
+
+.msg{
+background:#00a884;
+padding:10px;
+border-radius:10px;
+margin-top:10px;
+text-align:left;
+}
+
+/* Proposal */
+#proposal{
+background:linear-gradient(160deg,#ff4d6d,#ff758f);
+}
+
+.yes{background:#00c853;color:white;}
+.no{background:#ff1744;color:white;position:absolute;}
+
+/* Final */
+#final{
+background:linear-gradient(160deg,#ff4d6d,#ff758f);
+}
+
+img{
+width:250px;
+border-radius:20px;
+margin-top:20px;
+}
+
+/* Hearts */
+.heart{
+position:absolute;
+color:red;
+animation:float 5s linear infinite;
+}
+
+@keyframes float{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
+}
+</style>
+
+</head>
+<body>
+
+<audio id="music" autoplay loop>
+<source src="Ek-Tara-Vajda-Ve.mp3" type="audio/mpeg">
+</audio>
+
+<div id="lockscreen" class="screen active">
+<div class="lockbox">
+<h2>Enter password to open Shivaay's gift 💋</h2>
+<input id="pass" type="password">
+<br>
+<button class="unlock" onclick="unlock()">Unlock</button>
+<p id="wrong"></p>
+</div>
+</div>
+
+<div id="whatsapp" class="screen">
+<div class="chatbox">
+<h3>Shivaay 💋</h3>
+<div id="typing"></div>
+</div>
+</div>
+
+<div id="proposal" class="screen">
+<h1>I Love You Khaani ❤️</h1>
+<p>Will you be mine forever? 💍</p>
+<button class="yes" onclick="accepted()">Yes 💍</button>
+<button class="no" id="noBtn">No 😭</button>
+</div>
+
+<div id="final" class="screen">
+<h1>Forever Yours ❤️</h1>
+<img src="photo1.jpg">
+</div>
+
+<script>
+
+const password="pussy pic";
+
+function unlock(){
+if(document.getElementById("pass").value===password){
+show("whatsapp");
+startChat();
+}else{
+document.getElementById("wrong").innerText="Wrong password";
+}
+}
+
+function show(id){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+// typing animation
+const text="I love you so much ❤️\nYou are my everything.\nWill you be mine forever?";
+let i=0;
+
+function startChat(){
+let el=document.getElementById("typing");
+let interval=setInterval(()=>{
+el.innerHTML+=text[i];
+i++;
+if(i>=text.length){
+clearInterval(interval);
+setTimeout(()=>show("proposal"),1000);
+}
+},50);
+}
+
+// No button run away
+const noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("touchstart",moveNo);
+noBtn.addEventListener("mouseover",moveNo);
+
+function moveNo(){
+noBtn.style.top=Math.random()*80+"%";
+noBtn.style.left=Math.random()*80+"%";
+}
+
+// accepted
+function accepted(){
+show("final");
+}
+
+// hearts
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"%";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+},300);
+
+</script>
+
+</body>
+</html>
