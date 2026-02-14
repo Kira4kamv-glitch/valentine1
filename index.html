@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shivaay 💋</title>
+
+<style>
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+background:black;
+color:white;
+overflow:hidden;
+}
+
+/* lockscreen */
+#lockscreen{
+position:absolute;
+width:100%;
+height:100%;
+background:url('https://i.imgur.com/8Km9tLL.jpg') center/cover;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+backdrop-filter:blur(5px);
+}
+
+#lockscreen input{
+padding:15px;
+border-radius:10px;
+border:none;
+font-size:18px;
+text-align:center;
+}
+
+#lockscreen button{
+margin-top:10px;
+padding:12px 20px;
+border:none;
+border-radius:25px;
+font-size:18px;
+background:#00e676;
+color:black;
+}
+
+/* notification */
+#notification{
+position:absolute;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+background:#111;
+padding:12px 20px;
+border-radius:15px;
+display:none;
+box-shadow:0 0 20px rgba(0,255,150,0.5);
+}
+
+/* chat screen */
+#chat{
+display:none;
+height:100vh;
+background:#0b141a;
+}
+
+#chatHeader{
+background:#202c33;
+padding:15px;
+font-size:20px;
+}
+
+#messages{
+padding:15px;
+}
+
+.msg{
+background:#005c4b;
+padding:10px;
+border-radius:10px;
+margin-top:10px;
+max-width:70%;
+animation:fadeIn 0.5s;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(10px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+/* proposal */
+#proposal{
+display:none;
+position:absolute;
+top:0;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#ff4e8a,#ff8a8a);
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+button{
+padding:15px 25px;
+border:none;
+border-radius:25px;
+font-size:18px;
+margin:10px;
+}
+
+.yes{
+background:#00e676;
+color:black;
+}
+
+.no{
+background:red;
+color:white;
+position:absolute;
+}
+
+/* hearts */
+.heart{
+position:absolute;
+color:red;
+animation:float 5s linear infinite;
+}
+
+@keyframes float{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+<source src="Ek-Tara-Vajda-Ve.mp3" type="audio/mpeg">
+</audio>
+
+<!-- LOCKSCREEN -->
+<div id="lockscreen">
+<h2>Enter password</h2>
+<input type="password" id="pass">
+<button onclick="unlock()">Unlock</button>
+<p id="error"></p>
+</div>
+
+<!-- NOTIFICATION -->
+<div id="notification">
+📱 WhatsApp Message from shivaay 💋
+</div>
+
+<!-- CHAT -->
+<div id="chat">
+<div id="chatHeader">shivaay 💋</div>
+<div id="messages"></div>
+</div>
+
+<!-- PROPOSAL -->
+<div id="proposal">
+<h1>Khaani, will you be mine forever? 💍</h1>
+<button class="yes" onclick="accept()">Yes ❤️</button>
+<button class="no" id="noBtn">No 😭</button>
+</div>
+
+<script>
+
+const password="Boobs Lover";
+
+const messages=[
+"I love you Khaani ❤️",
+"You are my peace, my happiness, my everything.",
+"From the moment you came into my life,",
+"everything became beautiful.",
+"I want you forever. 💍"
+];
+
+function unlock(){
+let val=document.getElementById("pass").value;
+if(val===password){
+navigator.vibrate([200,100,200]);
+document.getElementById("lockscreen").style.display="none";
+setTimeout(showNotification,1000);
+document.getElementById("music").play();
+}else{
+document.getElementById("error").innerText="Wrong password";
+}
+}
+
+function showNotification(){
+document.getElementById("notification").style.display="block";
+navigator.vibrate(300);
+setTimeout(openChat,2000);
+}
+
+function openChat(){
+document.getElementById("notification").style.display="none";
+document.getElementById("chat").style.display="block";
+typeMessages();
+}
+
+let i=0;
+function typeMessages(){
+if(i<messages.length){
+let div=document.createElement("div");
+div.className="msg";
+div.innerText=messages[i];
+document.getElementById("messages").appendChild(div);
+navigator.vibrate(100);
+i++;
+setTimeout(typeMessages,1500);
+}else{
+setTimeout(showProposal,2000);
+}
+}
+
+function showProposal(){
+document.getElementById("chat").style.display="none";
+document.getElementById("proposal").style.display="flex";
+createHearts();
+}
+
+function accept(){
+alert("She said YES ❤️");
+}
+
+document.getElementById("noBtn").onmouseover=function(){
+this.style.top=Math.random()*80+"%";
+this.style.left=Math.random()*80+"%";
+};
+
+function createHearts(){
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"%";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),5000);
+},300);
+}
+
+</script>
+
+</body>
+</html>
